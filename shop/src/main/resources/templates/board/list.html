@@ -2,14 +2,80 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/bagic}">
-
-    <div layout:fragment="content" class="m-2 p-2 container  border border-1">
+<!--container  border border-1-->
+    <div layout:fragment="content" class="m-2 p-2 ">
         <!-- 해당 페이지 콘텐츠 영역 작성 -->
         <h1 class="text-center">해당 관련 콘텐츠</h1>
         <hr>
-            [[${responseDTO.dtoList}]]
+        [[${responseDTO.dtoList}]]
+        <!-- 검색창-->
+        <div  ></div>
+        <!-- 리스트 -->
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card">
+                    <h5 class="card-header">Board List</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Board List  </h5>
+                       <!--board list content -->
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Bno</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">writer</th>
+                                <th scope="col">RegDate</th>
+                            </tr>
+                            </thead>
+                            <!-- getLink()   th:with="${pageRequestDTO.getLink}"-->
+                            <tbody  >
+                            <tr th:each="dto: ${responseDTO.dtoList}">
+                                <th scope="row">[[${dto.bno}]]</th>
+                                <td> <a th:href="|@{/borad/read(bno=${dto.bno})}|">[[${dto.title}]]</a> </td>
+                                <td>[[${dto.writer}]]</td>
+                                <td>[[${dto.regDate}]]</td>
+                            </tr>
 
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <!--페이징 -->
+                    <div class="float-end d-flex justify-content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+        <!--모댈창 -->
     </div>
+
 
 
     <script  layout:fragment="script" th:inline="javascript">
