@@ -14,7 +14,7 @@ public interface BoardService {
 
     //PageRespnesDTO
     // 클라이언트로 부터 요청한 페이지 정보 처리하야ㅕ 응답하는 메서드
-    PageResponseDTO<BoardDto>  List(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<BoardDto>  list(PageRequestDTO pageRequestDTO);
 
 
 

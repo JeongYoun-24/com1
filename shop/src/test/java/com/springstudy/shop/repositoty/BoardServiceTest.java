@@ -77,7 +77,9 @@ public class BoardServiceTest {
         PageResponseDTO<BoardDto> responseDTO = boardService.List(pageRequestDTO);
         log.info(responseDTO);
 
-        
+        responseDTO.getDtoList().forEach(dto-> {
+            log.info(dto);
+        });
     }
 
 

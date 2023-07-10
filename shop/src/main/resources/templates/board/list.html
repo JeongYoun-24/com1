@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/bagic}">
+
+    <div layout:fragment="content" class="m-2 p-2 container  border border-1">
+        <!-- 해당 페이지 콘텐츠 영역 작성 -->
+        <h1 class="text-center">해당 관련 콘텐츠</h1>
+        <hr>
+            [[${responseDTO.dtoList}]]
+
+    </div>
+
+
+    <script  layout:fragment="script" th:inline="javascript">
+
+    </script>
+    <style  layout:fragment="css" th:inline="css">
+
+    </style>
+</html>
