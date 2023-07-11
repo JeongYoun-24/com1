@@ -28,7 +28,7 @@ public class BoardRepositoryTest {
     @Test
     @DisplayName("Board insert 테스트")
     public void testImsert(){
-        IntStream.rangeClosed(1,100).forEach(i-> {
+        IntStream.rangeClosed(1,1004).forEach(i-> {
             // 객체 생성
             Board board = Board.builder()
                     .title("title..."+i)

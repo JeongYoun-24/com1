@@ -28,6 +28,7 @@ public class BoardServiceTest {
                 .title("Sample title")
                 .content("Sampl content")
                 .writer("Sample user ")
+
                 .build();
         Long bno =  boardService.register(boardDto);
         log.info("register bno : "+bno);
@@ -74,7 +75,7 @@ public class BoardServiceTest {
                 .page(1)
                 .size(10)
                 .build();
-        PageResponseDTO<BoardDto> responseDTO = boardService.List(pageRequestDTO);
+        PageResponseDTO<BoardDto> responseDTO = boardService.list(pageRequestDTO);
         log.info(responseDTO);
 
         responseDTO.getDtoList().forEach(dto-> {
