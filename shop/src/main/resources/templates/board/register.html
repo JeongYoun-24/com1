@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/basic}">
+
+
+    <div layout:fragment="content" class="m-3 p-3">
+
+
+
+
+        <!-- register -->
+        <div class="row mt-3">
+            
+            <div class="row mt-3">
+                <div class="col">
+    
+                    <div class="card">
+                        <h5 class="card-header">Board register</h5>
+                        <div class="card-body">
+                            <form action="/board/register" method="post">
+                                <div class="input-group mb-3 row">
+                                    <label for="title" class="col-sm-2 col-form-label">title</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" name="title" class="form-control" id="title">
+                                    </div>
+                                  </div>
+
+                                  <div class="mb-3 row">
+                                    <label for="content" class="col-sm-2 col-form-label">content</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" name="content" class="form-control" id="content">
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="mb-3 row">
+                                    <label for="writer" class="col-sm-2 col-form-label">writer</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" name="writer" class="form-control" id="writer">
+                                    </div>
+                                  </div>
+
+                                  <div class="mb-3 row">
+                                    <div class="float-end">
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-outline-success">submit</button>
+                                            <button type="reset" class="btn btn-outline-danger">reset</button>
+                                        </div>
+                                    </div>
+                                  </div>
+
+                            </form>
+                           
+
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
+
+        </div>
+
+            <!-- 모달-->
+
+
+    </div>
+
+
+
+
+    <script layout:fragment="script" th:inline="javascript">
+        const errors = [[${errors}]]
+        console.log(errors)
+        //clear 버튼 기능
+
+        let errorMsg = ''
+
+        if(errors){
+            for(let i = 0; i < errors.length; i++){
+                errorMsg += `${errors[i].field}은(는) ${errors[i].defaultMessage} \n`
+            }
+        }
+        alert(errorMsg)
+
+
+    </script>
+    <style  layout:fragment="css"       th:inline="css">
+
+    </style>
+</html>

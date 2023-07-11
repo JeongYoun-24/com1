@@ -1,7 +1,7 @@
 package com.springstudy.shop.controller;
 
-
 import com.springstudy.shop.dto.ItemDto;
+import com.springstudy.shop.entity.Item;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,10 +80,10 @@ public class ControllerTest {
     public String thyStart(){
         return "index";
     }
-
-
-
-
+    @GetMapping("/start2")
+    public String thyStart2(){
+        return "index2";
+    }
 
 
 }

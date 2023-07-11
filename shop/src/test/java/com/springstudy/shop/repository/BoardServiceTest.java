@@ -1,4 +1,4 @@
-package com.springstudy.shop.repositoty;
+package com.springstudy.shop.repository;
 
 import com.springstudy.shop.dto.BoardDTO;
 import com.springstudy.shop.dto.PageRequestDTO;
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.time.LocalDateTime;
+
 @SpringBootTest
 @Log4j2
 @TestPropertySource(locations = "classpath:application.properties")
@@ -20,68 +22,63 @@ public class BoardServiceTest {
     private BoardService boardService;
 
     @Test
-    @DisplayName("Service 객체 확인 테스트 ")
-    public void RegosterTset(){
-//        log.info(boardService.getClass().getName());
+    @DisplayName("Service객체 생성 테스트")
+    public void testRegister(){
+        //log.info(boardService.getClass().getName());
 
         BoardDTO boardDto = BoardDTO.builder()
-                .title("Sample title")
-                .content("Sampl content")
-                .writer("Sample user ")
-
+                .title("Sample Title...")
+                .content("Sample Content...")
+                .writer("user00")
                 .build();
-        Long bno =  boardService.register(boardDto);
-        log.info("register bno : "+bno);
 
+        Long bno = boardService.register(boardDto);
+        log.info("register test bno: "+bno);
 
     }
+
     @Test
-    @DisplayName("Select ReadOne 테스트 ")
-    public void SelectTset(){
-    Long bno = 100L;
-
-    log.info("Board read one"+boardService.readOne(bno));
-
-
-
+    @DisplayName("ReadOne 테스트")
+    public void testReadOne(){
+        Long bno = 100L;
+        log.info("Board read one: "+boardService.readOne(bno));
     }
-
     @Test
     @DisplayName("modify 테스트")
-    public void ModifyTest(){
+    public void testModify(){
         BoardDTO boardDto = BoardDTO.builder()
-                .bno(101L)
-                .title("Update 101")
-                .content("Update 101")
+                .bno(50L)
+                .title("Update ... 50")
+                .content("Update content 50...")
                 .build();
+
         boardService.modify(boardDto);
-
     }
 
     @Test
-    @DisplayName("modify 테스트")
-    public void DeleteTest(){
-       Long bno = 101L;
-
+    @DisplayName("delete 테스트")
+    public void testDelete(){
+        Long bno = 101L;
         boardService.remove(bno);
-
     }
+
     @Test
-    @DisplayName("페이징 List 테스트")
-    public void testList (){
+    @DisplayName("페이징 list 테스트")
+    public void testList(){
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .type("tcw")
                 .keyword("1")
                 .page(1)
                 .size(10)
                 .build();
-        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
-        log.info(responseDTO);
 
-        responseDTO.getDtoList().forEach(dto-> {
+        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+
+        log.info(responseDTO);
+        responseDTO.getDtoList().forEach(dto -> {
             log.info(dto);
         });
-    }
 
+    }
 
 }

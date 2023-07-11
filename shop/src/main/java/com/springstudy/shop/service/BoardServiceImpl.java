@@ -1,6 +1,6 @@
 package com.springstudy.shop.service;
 
-import com.springstudy.shop.dto.BoardDto;
+import com.springstudy.shop.dto.BoardDTO;
 import com.springstudy.shop.dto.PageRequestDTO;
 import com.springstudy.shop.dto.PageResponseDTO;
 import com.springstudy.shop.entity.Board;
@@ -11,8 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,37 +24,35 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
 
     private final ModelMapper modelMapper;
-    private final BoardRepository boardRepository;
-
+    private final BoardRepository boardRepository;//dao
 
     @Override
-    public Long register(BoardDto boardDto) {
-        // dto-> entity로 데이터 복사
-        Board board = modelMapper.map(boardDto,Board.class);
+    public Long register(BoardDTO boardDto) {
+        // dto -> entity로 데이터 복사
+        Board board = modelMapper.map(boardDto, Board.class);
         Long bno = boardRepository.save(board).getBno();
-
 
         return bno;
     }
 
     @Override
-    public BoardDto readOne(Long bno) { //
+    public BoardDTO readOne(Long bno) {
         Optional<Board> result = boardRepository.findById(bno);
         Board board = result.orElseThrow();
-        BoardDto boardDto = modelMapper.map(board,BoardDto.class);
+
+        BoardDTO boardDto = modelMapper.map(board, BoardDTO.class);
 
         return boardDto;
     }
 
     @Override
-    public void modify(BoardDto boardDto) {
+    public void modify(BoardDTO boardDto) {
 
-       Optional<Board> result =  boardRepository.findById(boardDto.getBno());
-        Board board = result.orElseThrow();
+      Optional<Board> result = boardRepository.findById(boardDto.getBno());
+      Board board = result.orElseThrow();
 
-        board.change(boardDto.getTitle(),boardDto.getContent());
-        boardRepository.save(board);
-
+      board.change(boardDto.getTitle(), boardDto.getContent());
+      boardRepository.save(board);
 
     }
 
@@ -62,30 +60,26 @@ public class BoardServiceImpl implements BoardService {
     public void remove(Long bno) {
 
         boardRepository.deleteById(bno);
-
-
     }
 
     @Override
-    public PageResponseDTO<BoardDto> list(PageRequestDTO pageRequestDTO) {
-        String[] types = pageRequestDTO.getTypes();
+    public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
+
+        String [] types = pageRequestDTO.getTypes();
         String keyword = pageRequestDTO.getKeyword();
         Pageable pageable = pageRequestDTO.getPageable("bno");
 
         // 레포지토리에서 entity데이터 추출
-        Page<Board> result = boardRepository.search2(types,keyword,pageable);
+        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
         // entity -> dto
-        List<BoardDto> dtoList = result.getContent().stream()
-                .map(board -> modelMapper.map(board,BoardDto.class))
+        List<BoardDTO> dtoList = result.getContent().stream()
+                .map(board -> modelMapper.map(board, BoardDTO.class))
                 .collect(Collectors.toList());
 
-
-        return PageResponseDTO.<BoardDto>widthAll()
+        return PageResponseDTO.<BoardDTO>widthAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
                 .total((int)result.getTotalElements())
                 .build();
     }
-
-
 }
