@@ -1,28 +1,29 @@
-package com.springboot.pople.restcontroller;
+package com.springstudy.shop.controller;
 
-import com.springboot.pople.dto.UsersDTO;
-import com.springboot.pople.service.UsersService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.UUID;
 
-@RestController
 @Log4j2
-public class LoginCotroller {
-    @Autowired
-    private UsersService usersService;
+@Controller
+public class UsersController {
+
+    @GetMapping(value ="/loginpage2")
+    public String loginpage(){
+
+        return "users/login";
+    }
+
+
 
     @ResponseBody
-    @RequestMapping(value = "/login111s",method = {RequestMethod.POST})
+    @RequestMapping(value = "/login.do",method = {RequestMethod.POST})
     public String login(@RequestBody HashMap<String, Object> map, Model model, HttpServletResponse resp){
         String user_id = (String) map.get("user_id");
         String user_pwd = (String) map.get("user_pwd");
@@ -53,14 +54,15 @@ public class LoginCotroller {
 
         }
 
+
+
+
+
+
+
         String rt= "";
         int isOk=0;
-        UsersDTO usersDTO = usersService.readOne(user_id);
-//        List<Users> usersDTO = usersService.allList();
 
-
-        String memberId = usersDTO.getUser_id();
-        String memberPwd = usersDTO.getUser_pwd();
 //        member = service.login(user_id);
 
 //        String memberId = member.getUser_id();
@@ -71,13 +73,13 @@ public class LoginCotroller {
 
 
 
-        if(memberId.equals(user_id)) {
+        /*if(memberId.equals(user_id)) {
 
             if(memberPwd.equals(user_pwd)) {
 
                 isOk = 1;
-//                HttpSession session = req.getSession();
-//                session.setAttribute("loginInfo", usersDTO.getUser_id());
+                HttpSession session = req.getSession();
+                session.setAttribute("loginInfo", member.getUser_id());
 
             }else {
                 isOk=2;
@@ -89,7 +91,7 @@ public class LoginCotroller {
             isOk= -1;
             System.out.println("아이디 정보 없음");
 
-        }
+        }*/
 
 
         if(isOk ==1) {
@@ -114,7 +116,6 @@ public class LoginCotroller {
 
         return rt;
     }
-
 
 
 

@@ -1,8 +1,13 @@
 package com.springboot.pople.restcontroller;
 
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.springboot.pople.dto.UsersDTO;
+import com.springboot.pople.entity.Users;
 import com.springboot.pople.service.UsersService;
+import com.springboot.pople.sesstion.SessionConst;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,20 +15,24 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.UUID;
 
 @RestController
 @Log4j2
-public class LoginCotroller {
+public class LoginController {
+
     @Autowired
     private UsersService usersService;
 
-    @ResponseBody
-    @RequestMapping(value = "/login111s",method = {RequestMethod.POST})
-    public String login(@RequestBody HashMap<String, Object> map, Model model, HttpServletResponse resp){
+
+
+    @PostMapping(value = "/loginssssssss")
+    public String login(@RequestBody HashMap<String, Object> map, Model model,HttpServletResponse resp,HttpServletRequest req){
         String user_id = (String) map.get("user_id");
         String user_pwd = (String) map.get("user_pwd");
         String login_auto = (String) map.get("auto");
@@ -76,8 +85,8 @@ public class LoginCotroller {
             if(memberPwd.equals(user_pwd)) {
 
                 isOk = 1;
-//                HttpSession session = req.getSession();
-//                session.setAttribute("loginInfo", usersDTO.getUser_id());
+                HttpSession session = req.getSession();
+                session.setAttribute("loginInfo", usersDTO.getUser_id());
 
             }else {
                 isOk=2;
@@ -114,6 +123,30 @@ public class LoginCotroller {
 
         return rt;
     }
+
+
+//    @PostMapping(value = "login")
+//    public String loginPOST(@RequestBody HashMap<String, Object> map, HttpServletRequest request, RedirectAttributes rttr){
+//        log.info("Controller loginPOST");
+//        String user_id = (String) map.get("user_id");
+//        String user_pwd = (String) map.get("user_pwd");
+//        String login_auto = (String) map.get("auto");
+//
+//        HttpSession session = request.getSession();
+//
+////        UsersDTO login = usersService.userLogin(usersDTO);
+//        UsersDTO usersDTO = usersService.readOne(user_id);
+//
+//        String failMessage = "아이디 혹은 비밀번호가 잘못 되었습니다.";
+//
+//        if (usersDTO == null) {
+//            rttr.addFlashAttribute("loginFail", failMessage);
+//            return "redirect:/login";
+//        }
+//
+//        session.setAttribute("loginInfo", usersDTO.getUser_id());
+//        return "redirect:/main";
+//    }
 
 
 
