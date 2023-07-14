@@ -26,4 +26,17 @@ public class Cinema {
     @Column(nullable = false)
     private long cinama_seat_count;
 
+    public void change(String cinama_name,String cinama_addrss,long cinama_seat_count){
+        this.cinama_name = cinama_name;
+        this.cinama_addrss = cinama_addrss;
+        this.cinama_seat_count = cinama_seat_count;
+
+    }
+
+
+
 }
+
+
+
+

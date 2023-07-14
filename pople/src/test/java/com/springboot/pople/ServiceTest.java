@@ -79,16 +79,7 @@ public class ServiceTest {
     }
 
 
-    @Test
-    @DisplayName(value = "전체 리스트 조회 테스트 ")
-    public void findByItemNmTest(){
-        String user_email = "aaa@naver.com2";
 
-        List<Users> usersDTO = usersRepository.findByUser_email(user_email);
-
-        log.info(usersDTO);
-
-    }
 
 
 

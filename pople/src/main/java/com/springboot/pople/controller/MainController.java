@@ -30,12 +30,12 @@ public class MainController{
 
             return "views/main";
         }
-    @GetMapping(value = "index")
-    public void indexGET(@SessionAttribute(name = "loginUser", required = false)HashMap<String, Object> map, Model model) {
-        log.info("Controller indexGET");
-
-        model.addAttribute("loginUser", map);
-    }
+//    @GetMapping(value = "index")
+//    public void indexGET(@SessionAttribute(name = "loginUser", required = false)HashMap<String, Object> map, Model model) {
+//        log.info("Controller indexGET");
+//
+//        model.addAttribute("loginUser", map);
+//    }
 
 
 
