@@ -51,13 +51,19 @@ dependencies {
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.1'
 
 
+
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.1'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	runtimeOnly 'org.projectnessie:nessie-versioned-persist-non-transactional:0.59.0'
+
 	// 3. queryDsl 라이브러리
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-core:${queryDslVersion}"
 
 	implementation 'org.modelmapper:modelmapper:3.1.1'
-
+	implementation 'org.springframework.boot:spring-boot-starter-validation:3.1.1'
 
 }
 

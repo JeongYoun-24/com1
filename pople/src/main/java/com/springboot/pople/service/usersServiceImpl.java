@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Log4j2
@@ -93,7 +92,20 @@ public class usersServiceImpl implements UsersService{
         return null;
     }
 
-
+//    @Override
+//    public UsersDTO selectOne(String account) {
+//        return mapper.selectOne(account);
+//    }
+//
+//    @Override
+//    public void keepLogin(String session, Date limitTime, String account) {
+//        Map<String, Object> datas = new HashMap<>();
+//        datas.put("sessionId", session);
+//        datas.put("limitTime", limitTime);
+//        datas.put("account", account);
+//
+//        mapper.keepLogin(datas);
+//    }
 
 
 }

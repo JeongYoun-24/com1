@@ -16,10 +16,12 @@
 	<div layout:fragment="content" class="m-2 p-2 ">
 		<!-- 해당 페이지 콘텐츠 영역 작성 -->
 
-		[[${user_name}]]
+		<button id="logoutBtn">로그아웃</button>
+		[[${login}]]
+		<th:block th:if="${login != null}">
+				보입니까??
 
-
-
+		</th:block>
 
 
 
@@ -35,6 +37,9 @@
 
 
 <script  layout:fragment="script" th:inline="javascript">
+<!--	$(function(){-->
+<!--	})-->
+	console.log(${login})
 
 </script>
 <style  layout:fragment="css" th:inline="css">
