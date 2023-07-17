@@ -12,7 +12,7 @@ public class PageResponseDTO<E> {
 
     private int page;
     private int size;
-    private int totoal;
+    private int totoal;//오타
 
     // block에대한 시작페이지 번호, 끈페이지번호 , 1block=>1~10, 2block=>11~20,...
     private int start;//시작 페이지 번호

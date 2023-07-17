@@ -1,6 +1,7 @@
 package com.springstudy.shop.service;
 
 import com.springstudy.shop.dto.BoardDTO;
+import com.springstudy.shop.dto.BoardListRepliesCountDTO;
 import com.springstudy.shop.dto.PageRequestDTO;
 import com.springstudy.shop.dto.PageResponseDTO;
 import com.springstudy.shop.entity.Board;
@@ -79,6 +80,22 @@ public class BoardServiceImpl implements BoardService {
         return PageResponseDTO.<BoardDTO>widthAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
+                .total((int)result.getTotalElements())
+                .build();
+    }
+
+    @Override
+    public PageResponseDTO<BoardListRepliesCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO) {
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("bno");
+
+        Page<BoardListRepliesCountDTO> result = boardRepository.searchWithReplyCount(types, keyword, pageable);
+
+
+        return PageResponseDTO.<BoardListRepliesCountDTO>widthAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(result.getContent())
                 .total((int)result.getTotalElements())
                 .build();
     }

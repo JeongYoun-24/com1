@@ -30,6 +30,7 @@ public class BoardServiceTest {
                 .title("Sample Title...")
                 .content("Sample Content...")
                 .writer("user00")
+                .regDate(LocalDateTime.now())
                 .build();
 
         Long bno = boardService.register(boardDto);

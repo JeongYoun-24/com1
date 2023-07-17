@@ -30,13 +30,12 @@ public class BoardRepositoryTest {
     @Test
     @DisplayName("board insert테스트")
     public void testInsert(){
-        IntStream.rangeClosed(1,35).forEach(i -> {
+        IntStream.rangeClosed(1,1001).forEach(i -> {
             // 객체 생성
             Board board = Board.builder()
                     .title("title..."+i)
                     .content("content..."+i)
                     .writer("user"+i)
-                    .regDate(LocalDateTime.now())
                     .build();
 
             // 영속성 컨텍스트에 반영

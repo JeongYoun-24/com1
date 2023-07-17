@@ -3,10 +3,9 @@ package com.springstudy.shop.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -24,8 +23,6 @@ public class Board extends  BasicEntity {
 
     @Column(length = 50, nullable = false)
     private String writer;
-
-    private LocalDateTime regDate;
 
     // update(변경) 메서드 정의
     public void change(String title, String content){
